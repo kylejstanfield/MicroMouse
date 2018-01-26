@@ -42,11 +42,11 @@ public:
     c_partPathPos = 0;
   }
 
-  void setWalls(uint8_t w){ //BITMATH, HARD TO UNDERSTAND. NEED TO SAVE SPACE FOR ARDUINO
+  void setWalls(uint8_t w){ //C_DATA BECOMES FIRST FOUR BITS OF C_DATA and LAST FOUR BITS OF W
     c_data = (c_data & 240) | (w & 15);
-  } //& = BITWISE AND. IF BOTH BITS ARE ONE, GIVES ONE. OTHERWISE ZERO
+  }
 
-  bool northWall() { //
+  bool northWall() { //Returns whether or not the cell has north wall, so on and so forth for others
     return c_data & NORTH;
   }
 
@@ -62,7 +62,7 @@ public:
     return c_data & WEST;
   }
 
-  void hasNorthWall() { //Returns whether or not the cell has north wall, so on and so forth for others
+  void hasNorthWall() { //SETS SPACE TO HAVE NORTH WALL, SOUTH WALL ETC
     c_data |= NORTH;
   }
 
@@ -78,15 +78,15 @@ public:
     c_data |= WEST;
   }
 
-  bool visited() {
+  bool visited() { // VISITED = 00010000, IF 4th BIT = 1, IT IS VISITED
     return c_data & VISITED;
   }
 
-  void visit() {
+  void visit() { //SETS 4th BIT EQUAL TO ONE
     c_data |= VISITED;
   }
 
-  void unVisit(){
+  void unVisit(){ //
     c_data &= UNVISITED;
   }
 
